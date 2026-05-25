@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Spacez - Real Estate Solutions Crafted Around Your Vision</title>
+  <meta name="description" content="Explore Spacez real estate solutions including modern apartments, exclusive villas, secure plots, and premium farm plots designed for comfort and growth in Bangalore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       SPACEZ BRAND TOKENS (mirrored from styles.css)
+    ============================================================ */
+    :root {
+      --ink: #15362f;
+      --muted-ink: #5d6864;
+      --paper: #ffffff;
+      --soft: #f4f9f6;
+      --line: #dce9e2;
+      --brand: #245f4d;
+      --brand-light: #2f745f;
+      --gold: #8fb8a3;
+      --deep: #12332c;
+      --deep-2: #edf5f1;
+      --grad-primary: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+      --grad-dark: linear-gradient(135deg, #15362f 0%, #245f4d 100%);
+      --font-main: "Manrope", system-ui, sans-serif;
+      --font-serif: "Manrope", system-ui, sans-serif;
+      --shadow-sm: 0 4px 12px rgba(21, 54, 47, 0.04);
+      --shadow-md: 0 12px 30px rgba(21, 54, 47, 0.08);
+      --shadow-lg: 0 22px 50px rgba(21, 54, 47, 0.12);
+      --shadow-glow: 0 15px 35px rgba(36, 95, 77, 0.2);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 450ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: var(--font-main);
+      color: var(--ink);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-top: 84px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ============================================================
+       NAVIGATION (matches styles.css)
+    ============================================================ */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 84px;
+      padding: 12px clamp(20px, 6vw, 80px);
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid rgba(36,95,77,0.12);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-sm);
+    }
+    .brand { display: inline-flex; align-items: center; width: min(200px, 45vw); }
+    .brand img { max-height: 48px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; font-weight: 700; }
+    .nav-links a {
+      position: relative; padding: 8px 16px;
+      border-radius: var(--radius-sm); color: var(--muted-ink);
+      transition: all var(--transition-fast);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--brand); background: rgba(36,95,77,0.05);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%); width: 0; height: 2px;
+      background: var(--brand); transition: width var(--transition-fast);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 50%; }
+    .nav-toggle, .nav-button { display: none; }
+
+    /* ============================================================
+       KEYFRAMES
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes slideRight {
+      from { transform: scaleX(0); } to { transform: scaleX(1); }
+    }
+    @keyframes floatA {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-18px) rotate(3deg); }
+    }
+    @keyframes floatB {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(14px) rotate(-2deg); }
+    }
+    @keyframes floatC {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-10px) scale(1.04); }
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes lineGrow {
+      from { width: 0; } to { width: 80px; }
+    }
+    @keyframes blobPulse {
+      0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; transform: scale(1) rotate(0deg); }
+      33%      { border-radius: 40% 60% 45% 55% / 55% 45% 60% 40%; transform: scale(1.05) rotate(3deg); }
+      66%      { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; transform: scale(0.97) rotate(-2deg); }
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes progressLine {
+      from { transform: scaleY(0); transform-origin: top; }
+      to   { transform: scaleY(1); transform-origin: top; }
+    }
+    @keyframes particleFloat {
+      0%   { transform: translate(0, 0) scale(1); opacity: 0.6; }
+      50%  { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 1; }
+      100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    }
+    @keyframes gradientShift {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    @keyframes scanLine {
+      from { top: -2px; } to { top: 100%; }
+    }
+
+    /* ============================================================
+       HERO — DARK CINEMATIC
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--deep);
+      overflow: hidden;
+      padding: 120px clamp(24px, 8vw, 120px) 80px;
+    }
+
+    /* Animated gradient orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(36,95,77,0.45) 0%, transparent 70%);
+      top: -100px; right: -80px;
+      animation: floatA 8s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(143,184,163,0.2) 0%, transparent 70%);
+      bottom: -60px; left: 15%;
+      animation: floatB 10s ease-in-out infinite;
+    }
+    .hero-orb-3 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(47,116,95,0.3) 0%, transparent 70%);
+      top: 40%; left: 55%;
+      animation: floatC 7s ease-in-out infinite;
+    }
+
+    /* Decorative grid overlay */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(143,184,163,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(143,184,163,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* Animated particles */
+    .hero-particles {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: particleFloat var(--dur, 6s) ease-in-out infinite var(--delay, 0s);
+    }
+
+    /* Rotating ring decoration */
+    .hero-ring {
+      position: absolute;
+      right: clamp(60px, 12vw, 200px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(280px, 35vw, 480px);
+      height: clamp(280px, 35vw, 480px);
+      border: 1px solid rgba(143,184,163,0.15);
+      border-radius: 50%;
+      z-index: 1;
+      animation: rotateSlow 40s linear infinite;
+    }
+    .hero-ring::before {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border: 1px dashed rgba(143,184,163,0.1);
+      border-radius: 50%;
+    }
+    .hero-ring-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(143,184,163,0.6);
+      top: -5px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Hero text blob bg */
+    .hero-blob {
+      position: absolute;
+      width: 520px; height: 420px;
+      background: rgba(36,95,77,0.18);
+      animation: blobPulse 12s ease-in-out infinite;
+      top: 10%; left: -60px;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-eyebrow span {
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: 0;
+      color: #fff;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transform-origin: left;
+      animation: slideRight 1.2s 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.65s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font-main);
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition-normal);
+    }
+    .btn.primary {
+      color: #fff;
+      background: var(--brand);
+      background-image: var(--grad-primary);
+      box-shadow: var(--shadow-glow);
+    }
+    .btn.primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(36,95,77,0.35); }
+    .btn.ghost {
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.3);
+      backdrop-filter: blur(8px);
+    }
+    .btn.ghost:hover { background: #fff; color: var(--brand); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .btn.light { color: var(--brand); background: #fff; box-shadow: var(--shadow-sm); }
+    .btn.light:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+    /* Hero stats row */
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.85s ease both;
+    }
+    .hero-stat { }
+    .hero-stat strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat strong span {
+      background: linear-gradient(135deg, var(--gold), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-stat p {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.35);
+      animation: fadeIn 1.5s 1.5s ease both;
+    }
+    .scroll-wheel {
+      width: 22px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-wheel::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 6px;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: scrollDot 2s ease-in-out infinite;
+    }
+    @keyframes scrollDot {
+      0%,100% { top: 6px; opacity: 1; }
+      50%      { top: 18px; opacity: 0.3; }
+    }
+
+    /* ============================================================
+       SECTION BASE
+    ============================================================ */
+    .section {
+      padding: clamp(72px, 10vw, 120px) clamp(24px, 8vw, 120px);
+      position: relative;
+    }
+    .section.muted { background: var(--soft); }
+    .section.dark { background: var(--deep); color: #fff; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--brand);
+      margin-bottom: 16px;
+    }
+    .section-label.light { color: var(--gold); }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: currentColor;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+    .section-head.center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-head h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: inherit;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+    .section-head p {
+      font-size: 1.05rem;
+      color: var(--muted-ink);
+      line-height: 1.7;
+    }
+    .section.dark .section-head p { color: rgba(255,255,255,0.6); }
+
+    /* ============================================================
+       SCROLL REVEAL SYSTEM
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       SERVICES — IMMERSIVE PROPERTY CARDS
+    ============================================================ */
+    .services-section {
+      background: var(--soft);
+      padding: clamp(72px, 10vw, 120px) 0;
+      overflow: hidden;
+    }
+    .services-section .section-head {
+      padding: 0 clamp(24px, 8vw, 120px);
+    }
+
+    /* Horizontal scroll marquee ticker */
+    .services-ticker {
+      overflow: hidden;
+      background: var(--brand);
+      padding: 14px 0;
+      margin-bottom: 0;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 48px;
+      animation: tickerScroll 22s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.8);
+    }
+    .ticker-dot {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Staggered property card grid */
+    .property-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .prop-card {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--deep);
+    }
+    .prop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--card-bg, var(--grad-dark));
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .prop-card:nth-child(1) { --card-bg: linear-gradient(145deg, #12332c 0%, #1a4a3a 100%); }
+    .prop-card:nth-child(2) { --card-bg: linear-gradient(145deg, #1a4a3a 0%, #245f4d 100%); }
+    .prop-card:nth-child(3) { --card-bg: linear-gradient(145deg, #0e2820 0%, #15362f 100%); }
+    .prop-card:nth-child(4) { --card-bg: linear-gradient(145deg, #245f4d 0%, #2f745f 100%); }
+
+    /* Geometric pattern per card */
+    .prop-card-geo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .prop-card:hover .prop-card-geo { opacity: 0.6; }
+
+    .prop-card-number {
+      position: absolute;
+      top: 32px; right: 36px;
+      font-family: var(--font-serif);
+      font-size: 6rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      z-index: 2;
+      transition: all 0.5s ease;
+      user-select: none;
+    }
+    .prop-card:hover .prop-card-number {
+      color: rgba(255,255,255,0.08);
+      transform: scale(1.1) translateY(-8px);
+    }
+
+    .prop-card-icon {
+      position: relative;
+      z-index: 3;
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+    .prop-card:hover .prop-card-icon {
+      background: var(--brand);
+      border-color: var(--brand);
+      transform: scale(1.1);
+    }
+    .prop-card-icon svg { stroke: rgba(255,255,255,0.85); transition: stroke 0.4s; }
+
+    .prop-card-body { position: relative; z-index: 3; }
+    .prop-card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .prop-card h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+    .prop-card p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 360px;
+    }
+
+    .prop-card-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .prop-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.3s;
+    }
+    .prop-card:hover .prop-feature { color: rgba(255,255,255,0.8); }
+    .prop-feature-dot {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .prop-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.4);
+      transition: all 0.3s;
+    }
+    .prop-card:hover .prop-card-cta {
+      color: var(--gold);
+      gap: 14px;
+    }
+    .prop-card-cta-line {
+      width: 24px; height: 1px;
+      background: currentColor;
+      transition: width 0.4s;
+    }
+    .prop-card:hover .prop-card-cta-line { width: 40px; }
+
+    /* Bottom reveal bar on hover */
+    .prop-card-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--brand-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .prop-card:hover .prop-card-bar { transform: scaleX(1); }
+
+    /* ============================================================
+       MARKETING SERVICES — EDITORIAL LAYOUT
+    ============================================================ */
+    .marketing-section {
+      background: #fff;
+      padding: clamp(72px, 10vw, 120px) clamp(24px, 8vw, 120px);
+    }
+
+    .marketing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .mkt-card {
+      position: relative;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+      min-height: 280px;
+    }
+    .mkt-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--grad-dark);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: var(--radius-lg);
+    }
+    .mkt-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .mkt-card:hover::before { opacity: 1; }
+    .mkt-card:hover * { --text-override: rgba(255,255,255,0.85); }
+    .mkt-card:hover h3, .mkt-card:hover .mkt-card-num { color: #fff; }
+    .mkt-card:hover p { color: rgba(255,255,255,0.65); }
+    .mkt-card:hover .mkt-card-arrow { color: var(--gold); }
+
+    .mkt-card-top { position: relative; z-index: 2; }
+    .mkt-card-num {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      color: var(--line);
+      line-height: 1;
+      font-weight: 800;
+      margin-bottom: 12px;
+      transition: color 0.4s;
+    }
+    .mkt-card h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      transition: color 0.4s;
+    }
+    .mkt-card p {
+      font-size: 0.9rem;
+      color: var(--muted-ink);
+      line-height: 1.65;
+      transition: color 0.4s;
+    }
+    .mkt-card-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      margin-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .mkt-card:hover .mkt-card-bottom { border-color: rgba(255,255,255,0.1); }
+    .mkt-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--brand);
+      transition: color 0.4s;
+    }
+    .mkt-card:hover .mkt-tag { color: var(--gold); }
+    .mkt-card-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+      color: var(--muted-ink);
+      transition: all 0.4s;
+    }
+    .mkt-card:hover .mkt-card-arrow {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      color: #fff;
+      transform: rotate(45deg);
+    }
+
+    /* Geo deco inside mkt cards */
+    .mkt-card-geo {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border: 1px solid rgba(36,95,77,0.07);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      transition: all 0.4s;
+    }
+    .mkt-card-geo::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(36,95,77,0.05);
+      border-radius: 50%;
+    }
+    .mkt-card:hover .mkt-card-geo {
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    /* ============================================================
+       WHY CHOOSE — DARK SECTION WITH ANIMATED COUNTERS
+    ============================================================ */
+    .why-section {
+      background: var(--deep);
+      padding: clamp(72px, 10vw, 120px) clamp(24px, 8vw, 120px);
+      position: relative;
+      overflow: hidden;
+    }
+    .why-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(143,184,163,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(143,184,163,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      position: relative;
+      z-index: 2;
+    }
+    .why-left { }
+    .why-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .why-left h2 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .why-left > p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* Animated progress metrics */
+    .why-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .why-metric {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .why-metric-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      min-width: 80px;
+      line-height: 1;
+    }
+    .why-metric-num span { color: var(--gold); }
+    .why-metric-right { flex: 1; }
+    .why-metric-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+    }
+    .why-progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .why-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand-light), var(--gold));
+      border-radius: 2px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .why-metric.animated .why-progress-fill { transform: scaleX(1); }
+
+    /* Feature cards on right */
+    .why-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .why-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand-light), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .why-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.14);
+      transform: translateY(-4px);
+    }
+    .why-card:hover::after { transform: scaleX(1); }
+
+    .why-card-num {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+    .why-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .why-card p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       PROCESS TIMELINE
+    ============================================================ */
+    .process-section {
+      background: #fff;
+      padding: clamp(72px, 10vw, 120px) clamp(24px, 8vw, 120px);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 20px;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px; left: 60px; right: 60px;
+      height: 1px;
+      background: var(--line);
+      z-index: 0;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+    .process-step-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--soft);
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+    .process-step:hover .process-step-circle {
+      background: var(--brand);
+      border-color: var(--brand);
+      transform: scale(1.12);
+      box-shadow: var(--shadow-glow);
+    }
+    .process-step:hover .process-step-circle svg { stroke: #fff; }
+    .process-step-circle svg { stroke: var(--brand); transition: stroke 0.4s; }
+
+    .process-step h4 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .process-step p {
+      font-size: 0.85rem;
+      color: var(--muted-ink);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       FINAL CTA — DRAMATIC FULL-WIDTH
+    ============================================================ */
+    .final-section {
+      position: relative;
+      background: var(--deep);
+      overflow: hidden;
+      padding: clamp(80px, 12vw, 140px) clamp(24px, 8vw, 120px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
+    .final-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(36,95,77,0.4) 0%, transparent 65%),
+                  radial-gradient(ellipse at 20% 80%, rgba(143,184,163,0.15) 0%, transparent 55%);
+    }
+    .final-orb {
+      position: absolute;
+      right: -120px; top: 50%;
+      transform: translateY(-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(47,116,95,0.35) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      animation: floatA 10s ease-in-out infinite;
+    }
+
+    /* Scan line effect */
+    .final-scan {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(143,184,163,0.3), transparent);
+      animation: scanLine 4s linear infinite;
+      pointer-events: none;
+    }
+
+    .final-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+    }
+    .final-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .final-content h2 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .final-content p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .final-actions {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      padding: clamp(48px, 8vw, 80px) clamp(24px, 8vw, 120px) 32px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 60px;
+    }
+    .site-footer p {
+      font-size: 0.9rem;
+      color: var(--muted-ink);
+      line-height: 1.65;
+      margin-top: 16px;
+      max-width: 340px;
+    }
+    .footer-links { display: flex; flex-direction: column; justify-content: space-between; }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+    }
+    .footer-nav a {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--brand);
+      transition: color var(--transition-fast);
+    }
+    .footer-nav a:hover { color: var(--brand-light); }
+    .footer-credit {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--muted-ink);
+    }
+
+    /* Floating widget */
+    .floating-widget {
+      position: fixed;
+      bottom: 28px; right: 24px;
+      z-index: 500;
+    }
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px; height: 56px;
+      background: var(--brand);
+      background-image: var(--grad-primary);
+      border-radius: 50%;
+      color: #fff;
+      box-shadow: var(--shadow-glow);
+      transition: all var(--transition-normal);
+    }
+    .floating-btn:hover { transform: scale(1.12); box-shadow: 0 20px 40px rgba(36,95,77,0.4); }
+
+    /* ============================================================
+       EYEBROW (keep from styles.css)
+    ============================================================ */
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 4px 12px;
+      background: rgba(143,184,163,0.15);
+      border-radius: var(--radius-full);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .why-layout { grid-template-columns: 1fr; gap: 60px; }
+      .why-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .property-showcase { grid-template-columns: 1fr; }
+      .marketing-grid { grid-template-columns: 1fr; }
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .process-steps::before { display: none; }
+      .final-section { flex-direction: column; align-items: flex-start; }
+      .site-header { min-height: 78px; padding: 12px 24px; }
+      .nav-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        width: 44px; height: 44px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        z-index: 101;
+      }
+      .nav-button span {
+        display: block;
+        height: 2px; width: 100%;
+        background: var(--brand);
+      }
+      .nav-links {
+        position: fixed; top: 0; right: 0;
+        width: min(320px, 80vw); height: 100dvh;
+        background: #fff;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 96px 32px 48px;
+        box-shadow: var(--shadow-lg);
+        z-index: 999;
+        transform: translateX(100%);
+        transition: transform var(--transition-normal);
+      }
+      .nav-toggle:checked ~ .nav-links { transform: translateX(0); }
+      .nav-toggle:checked ~ .nav-button span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .nav-toggle:checked ~ .nav-button span:nth-child(2) { opacity: 0; }
+      .nav-toggle:checked ~ .nav-button span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+      .why-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      html, body { width: 100%; overflow-x: hidden; }
+      .hero { padding: 96px 18px 64px; min-height: auto; }
+      .hero-title { font-size: clamp(2.2rem, 12vw, 3.3rem); }
+      .hero-desc { font-size: 0.98rem; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn { width: 100%; white-space: normal; text-align: center; }
+      .hero-ring { display: none; }
+      .section-head.center { text-align: left; }
+      .section-head h2 { font-size: clamp(1.75rem, 9vw, 2.45rem); }
+      .section { padding-left: 18px; padding-right: 18px; }
+      .services-section .section-head { padding: 0 18px; }
+      .prop-card { min-height: 380px; padding: 28px; }
+      .marketing-section,
+      .why-section,
+      .process-section,
+      .final-section { padding-left: 18px; padding-right: 18px; }
+      .marketing-grid { gap: 18px; }
+      .why-metrics { gap: 24px; }
+      .why-metric { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .process-steps { grid-template-columns: 1fr; gap: 32px; }
+      .why-cards { grid-template-columns: 1fr; }
+      .site-footer { grid-template-columns: 1fr; gap: 32px; padding: 44px 18px 32px; }
+      .footer-nav { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .footer-credit { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+    @media (max-width: 380px) {
+      .hero { padding-left: 14px; padding-right: 14px; }
+      .prop-card,
+      .mkt-card,
+      .why-card { padding: 22px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Spacez home">
+      <img src="assets/spacez-logo-transparent.png" alt="Spacez">
+    </a>
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" aria-label="Toggle navigation">
+    <label class="nav-button" for="nav-toggle"><span></span><span></span><span></span></label>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a class="active" href="services.html">Services</a>
+      <a href="projects.html">Projects</a>
+      <a href="channel-partners.html">Channel Partners</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-blob"></div>
+
+      <!-- Floating particles -->
+      <div class="hero-particles" id="heroParticles"></div>
+
+      <!-- Decorative ring -->
+      <div class="hero-ring">
+        <div class="hero-ring-dot"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span></span>
+          Our Services
+        </div>
+        <h1 class="hero-title">
+          Real Estate Solutions<br>
+          <em>Crafted Around</em><br>
+          Your Vision
+        </h1>
+        <p class="hero-desc">
+          At Spacez, we go beyond conventional real estate services to deliver opportunities that align with your lifestyle and investment goals — from dream homes to future-ready land investments.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="contact.html">Get Free Consultation</a>
+          <a class="btn ghost" href="#what-we-offer">Explore What We Offer</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong><span>500+</span></strong>
+            <p>Properties Delivered</p>
+          </div>
+          <div class="hero-stat">
+            <strong><span>12+</span></strong>
+            <p>Years in Bangalore</p>
+          </div>
+          <div class="hero-stat">
+            <strong><span>98%</span></strong>
+            <p>Client Satisfaction</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <div class="scroll-wheel"></div>
+        Scroll
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TICKER
+    ============================================================ -->
+    <div class="services-ticker">
+      <div class="ticker-track">
+        <span class="ticker-item"><span class="ticker-dot"></span>Apartments</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Luxury Villas</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Premium Plots</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Farm Plots</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Digital Marketing</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Telemarketing</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Print & Broadcast</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Affiliate Marketing</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-item"><span class="ticker-dot"></span>Apartments</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Luxury Villas</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Premium Plots</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Farm Plots</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Digital Marketing</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Telemarketing</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Print & Broadcast</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Affiliate Marketing</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         WHAT WE OFFER — PROPERTY CARDS
+    ============================================================ -->
+    <section id="what-we-offer" class="services-section">
+      <div class="section-head reveal">
+        <div class="section-label">What We Offer</div>
+        <h2>Spaces Tailored for Your<br><em style="font-style:normal;color:var(--brand)">Lifestyle & Goals</em></h2>
+        <p>Every property type we offer is curated with intention — to match your ambitions, comfort, and investment horizon.</p>
+      </div>
+
+      <div class="property-showcase">
+
+        <!-- Apartments -->
+        <article class="prop-card reveal">
+          <div class="prop-card-geo">
+            <svg width="100%" height="100%" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.35">
+              <circle cx="360" cy="80" r="120" fill="none" stroke="rgba(143,184,163,0.15)" stroke-width="1"/>
+              <circle cx="360" cy="80" r="80" fill="none" stroke="rgba(143,184,163,0.1)" stroke-width="1"/>
+              <line x1="200" y1="0" x2="200" y2="480" stroke="rgba(143,184,163,0.05)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="prop-card-number">01</div>
+
+          <div class="prop-card-body">
+            <div class="prop-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <span class="prop-card-tag">Residential</span>
+            <h3>Apartments</h3>
+            <p>Modern homes designed for comfort, convenience, and contemporary living in prime Bangalore locations.</p>
+            <div class="prop-card-features">
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Excellent urban connectivity</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>World-class lifestyle amenities</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Ready-to-move and launch properties</span>
+            </div>
+            <a class="prop-card-cta" href="contact.html">
+              <span class="prop-card-cta-line"></span>
+              Inquire Now
+            </a>
+          </div>
+          <div class="prop-card-bar"></div>
+        </article>
+
+        <!-- Villas -->
+        <article class="prop-card reveal reveal-delay-1">
+          <div class="prop-card-geo">
+            <svg width="100%" height="100%" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.4">
+              <polygon points="200,20 380,160 380,460 20,460 20,160" fill="none" stroke="rgba(143,184,163,0.1)" stroke-width="1"/>
+              <polygon points="200,80 320,180 320,400 80,400 80,180" fill="none" stroke="rgba(143,184,163,0.07)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="prop-card-number">02</div>
+          <div class="prop-card-body">
+            <div class="prop-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="prop-card-tag">Luxury Living</span>
+            <h3>Villas</h3>
+            <p>Exclusive residences that offer privacy, luxury, and thoughtfully planned spaces for the discerning buyer.</p>
+            <div class="prop-card-features">
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Secured gated community</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Expansive landscape views</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Premium, high-end specifications</span>
+            </div>
+            <a class="prop-card-cta" href="contact.html">
+              <span class="prop-card-cta-line"></span>
+              Inquire Now
+            </a>
+          </div>
+          <div class="prop-card-bar"></div>
+        </article>
+
+        <!-- Plots -->
+        <article class="prop-card reveal reveal-delay-2">
+          <div class="prop-card-geo">
+            <svg width="100%" height="100%" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.35">
+              <rect x="40" y="40" width="320" height="400" fill="none" stroke="rgba(143,184,163,0.1)" stroke-width="1"/>
+              <rect x="80" y="80" width="240" height="320" fill="none" stroke="rgba(143,184,163,0.07)" stroke-width="1"/>
+              <line x1="0" y1="240" x2="400" y2="240" stroke="rgba(143,184,163,0.05)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="prop-card-number">03</div>
+          <div class="prop-card-body">
+            <div class="prop-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span class="prop-card-tag">Investment</span>
+            <h3>Plots</h3>
+            <p>Secure land investments with strong appreciation potential and the complete freedom to build your vision.</p>
+            <div class="prop-card-features">
+              <span class="prop-feature"><span class="prop-feature-dot"></span>100% verified legal clear titles</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>High capital growth corridors</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Design & build architectural freedom</span>
+            </div>
+            <a class="prop-card-cta" href="contact.html">
+              <span class="prop-card-cta-line"></span>
+              Inquire Now
+            </a>
+          </div>
+          <div class="prop-card-bar"></div>
+        </article>
+
+        <!-- Farm Plots -->
+        <article class="prop-card reveal reveal-delay-3">
+          <div class="prop-card-geo">
+            <svg width="100%" height="100%" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.4">
+              <ellipse cx="200" cy="240" rx="180" ry="200" fill="none" stroke="rgba(143,184,163,0.12)" stroke-width="1"/>
+              <ellipse cx="200" cy="240" rx="120" ry="140" fill="none" stroke="rgba(143,184,163,0.07)" stroke-width="1"/>
+              <line x1="200" y1="40" x2="200" y2="440" stroke="rgba(143,184,163,0.06)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="prop-card-number">04</div>
+          <div class="prop-card-body">
+            <div class="prop-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 18c3.2-2.7 6.4-4 9.6-4H20"/>
+                <path d="M4 14c2.4-2 4.9-3.1 7.4-3.1H20"/>
+                <path d="M4 10c1.7-1.4 3.4-2.1 5.2-2.1H20"/>
+                <path d="M13 14V9"/>
+                <path d="M13 9c-2.6 0-4.4-1.5-5.1-4.2 2.8-.2 4.5 1.1 5.1 4.2Z"/>
+                <path d="M13 9c2.2 0 3.7-1.2 4.4-3.4-2.4-.2-3.8.9-4.4 3.4Z"/>
+                <path d="M3 21h18"/>
+              </svg>
+            </div>
+            <span class="prop-card-tag">Nature & Retreat</span>
+            <h3>Farm Plots</h3>
+            <p>A perfect blend of nature and investment — ideal for weekend retreats and long-term sustainable growth.</p>
+            <div class="prop-card-features">
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Managed eco-friendly farmland</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Serene weekend getaway spaces</span>
+              <span class="prop-feature"><span class="prop-feature-dot"></span>Sustainable agricultural benefits</span>
+            </div>
+            <a class="prop-card-cta" href="contact.html">
+              <span class="prop-card-cta-line"></span>
+              Inquire Now
+            </a>
+          </div>
+          <div class="prop-card-bar"></div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MARKETING SERVICES
+    ============================================================ -->
+    <section class="marketing-section">
+      <div class="section-head center reveal">
+        <div class="section-label" style="justify-content:center;">Marketing Services</div>
+        <h2 style="font-family:var(--font-serif)">Marketing Channels That Drive<br><em style="font-style:normal;color:var(--brand)">Qualified Leads</em></h2>
+        <p>Dedicated services for digital campaigns, direct buyer outreach, offline visibility, and partner-led sales growth across Bangalore.</p>
+      </div>
+
+      <div class="marketing-grid">
+
+        <a href="digital-marketing.html" class="mkt-card reveal">
+          <div class="mkt-card-top">
+            <div class="mkt-card-num">01</div>
+            <h3>Digital Marketing</h3>
+            <p>Performance-driven campaigns across search, social, and programmatic channels — engineered to attract the right buyers at the right moment.</p>
+          </div>
+          <div class="mkt-card-bottom">
+            <span class="mkt-tag">Digital · SEO · PPC · Social</span>
+            <span class="mkt-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="mkt-card-geo"></div>
+        </a>
+
+        <a href="telemarketing.html" class="mkt-card reveal reveal-delay-1">
+          <div class="mkt-card-top">
+            <div class="mkt-card-num">02</div>
+            <h3>Tele Marketing</h3>
+            <p>Direct buyer outreach through trained consultants who qualify leads, nurture intent, and convert conversations into site visits.</p>
+          </div>
+          <div class="mkt-card-bottom">
+            <span class="mkt-tag">Outbound · Lead Qualification</span>
+            <span class="mkt-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="mkt-card-geo"></div>
+        </a>
+
+        <a href="print-broadcast-marketing.html" class="mkt-card reveal reveal-delay-2">
+          <div class="mkt-card-top">
+            <div class="mkt-card-num">03</div>
+            <h3>Print & Broadcast</h3>
+            <p>Commanding offline presence through premium newspaper inserts, hoardings, radio spots, and television placements that build brand trust.</p>
+          </div>
+          <div class="mkt-card-bottom">
+            <span class="mkt-tag">Print · OOH · Radio · TV</span>
+            <span class="mkt-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="mkt-card-geo"></div>
+        </a>
+
+        <a href="affiliate-marketing.html" class="mkt-card reveal reveal-delay-3">
+          <div class="mkt-card-top">
+            <div class="mkt-card-num">04</div>
+            <h3>Affiliate Marketing</h3>
+            <p>A curated partner ecosystem of channel brokers, NRI consultants, and referral networks that multiply your sales reach exponentially.</p>
+          </div>
+          <div class="mkt-card-bottom">
+            <span class="mkt-tag">Partner · Referral · Broker Network</span>
+            <span class="mkt-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="mkt-card-geo"></div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHY CHOOSE SPACEZ
+    ============================================================ -->
+    <section class="why-section">
+      <div class="why-grid-bg"></div>
+      <div class="why-layout">
+
+        <div class="why-left reveal">
+          <div class="section-label light">Why Choose Spacez?</div>
+          <h2>Uncompromising Commitment,<br><em>Clear Confidence</em></h2>
+          <p>Every interaction, every transaction, every home — built on a foundation of transparency, expertise, and genuine care for your future.</p>
+
+          <div class="why-metrics">
+            <div class="why-metric" data-pct="0.92">
+              <div class="why-metric-num">92<span>%</span></div>
+              <div class="why-metric-right">
+                <div class="why-metric-label">Repeat & Referral Clients</div>
+                <div class="why-progress-bar"><div class="why-progress-fill" style="--fill:0.92"></div></div>
+              </div>
+            </div>
+            <div class="why-metric" data-pct="0.98">
+              <div class="why-metric-num">98<span>%</span></div>
+              <div class="why-metric-right">
+                <div class="why-metric-label">Legal Documentation Accuracy</div>
+                <div class="why-progress-bar"><div class="why-progress-fill" style="--fill:0.98"></div></div>
+              </div>
+            </div>
+            <div class="why-metric" data-pct="0.87">
+              <div class="why-metric-num">87<span>%</span></div>
+              <div class="why-metric-right">
+                <div class="why-metric-label">Clients Close Within 60 Days</div>
+                <div class="why-progress-bar"><div class="why-progress-fill" style="--fill:0.87"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-cards">
+          <article class="why-card reveal">
+            <div class="why-card-num">01</div>
+            <h3>Curated Premium Properties</h3>
+            <p>Only the finest handpicked options that guarantee superior quality, design excellence, and luxury living.</p>
+          </article>
+          <article class="why-card reveal reveal-delay-1">
+            <div class="why-card-num">02</div>
+            <h3>Verified Legal Documentation</h3>
+            <p>Complete peace of mind with meticulously cross-checked titles, sanctions, and transparent operations.</p>
+          </article>
+          <article class="why-card reveal reveal-delay-2">
+            <div class="why-card-num">03</div>
+            <h3>Strategic Investment Opportunities</h3>
+            <p>Strong capital appreciation with high-potential plots selected by our research team.</p>
+          </article>
+          <article class="why-card reveal reveal-delay-3">
+            <div class="why-card-num">04</div>
+            <h3>End-to-End Assistance</h3>
+            <p>Seamless experience covering shortlisting, site visits, legal checks, registry, and possession.</p>
+          </article>
+          <article class="why-card reveal reveal-delay-4" style="grid-column:1/-1">
+            <div class="why-card-num">05</div>
+            <h3>Trusted Market Expertise</h3>
+            <p>Leverage the wisdom of seasoned real estate professionals with deep, data-driven Bangalore market insights built over a decade.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROCESS TIMELINE
+    ============================================================ -->
+    <section class="process-section">
+      <div class="section-head center reveal">
+        <div class="section-label" style="justify-content:center">Our Process</div>
+        <h2 style="font-family:var(--font-serif)">Your Journey to the<br><em style="font-style:normal;color:var(--brand)">Perfect Space</em></h2>
+        <p>A seamless, transparent process from the first conversation to the day you receive your keys.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-step-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h4>Free Consultation</h4>
+          <p>Understand your goals, budget, and lifestyle needs in a personal session with our advisors.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="process-step-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h4>Property Shortlisting</h4>
+          <p>We curate a personalised selection of verified properties that match your exact criteria.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="process-step-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <h4>Site Visits & Evaluation</h4>
+          <p>Guided site visits with full transparency on legal status, amenities, and growth potential.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="process-step-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4>Closing & Possession</h4>
+          <p>End-to-end documentation, legal checks, registration support, and seamless possession.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FINAL CTA
+    ============================================================ -->
+    <section class="final-section">
+      <div class="final-orb"></div>
+      <div class="final-scan"></div>
+
+      <div class="final-content reveal">
+        <div class="section-label light" style="margin-bottom:20px">Find Your Perfect Space</div>
+        <h2>Spacez helps you make <em>confident</em> real estate decisions.</h2>
+        <p>From urban residences to future-ready investments, find spaces that offer both value and long-term potential with a team that truly cares.</p>
+      </div>
+
+      <div class="final-actions reveal reveal-delay-2">
+        <a class="btn light" href="contact.html">Get Free Consultation</a>
+        <a class="btn ghost" href="about.html">Meet Our Team</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div>
+      <a class="brand footer-brand" href="index.html">
+        <img src="assets/spacez-logo-transparent.png" alt="Spacez">
+      </a>
+      <p>Real estate solutions and consultancy services for developers, builders, landowners, and property owners across Bangalore.</p>
+    </div>
+    <div class="footer-links">
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="channel-partners.html">Channel Partners</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+    <div class="footer-credit">
+      <span>© 2026 Spacez. All rights reserved.</span>
+      <span>Bangalore's Premier Property Solutions & Marketing Agency</span>
+    </div>
+  </footer>
+
+  <!-- Floating Widget -->
+  <div class="floating-widget" aria-label="Quick consultation">
+    <a class="floating-btn" href="contact.html" title="Get Free Consultation" aria-label="Get Free Consultation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </a>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ── Scroll reveal ──────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── Progress bar animation ─────────────────────────────────
+    const metrics = document.querySelectorAll('.why-metric');
+    const metricObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('animated');
+          metricObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    metrics.forEach(m => metricObs.observe(m));
+
+    // ── Floating particles in hero ─────────────────────────────
+    const container = document.getElementById('heroParticles');
+    const count = window.innerWidth > 768 ? 18 : 8;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.cssText = `
+        left:${Math.random()*100}%;
+        top:${Math.random()*100}%;
+        --tx:${(Math.random()-0.5)*40}px;
+        --ty:${(Math.random()-0.5)*40}px;
+        --dur:${4+Math.random()*6}s;
+        --delay:${Math.random()*5}s;
+        opacity:${0.2+Math.random()*0.5};
+        width:${2+Math.random()*4}px;
+        height:${2+Math.random()*4}px;
+      `;
+      container.appendChild(p);
+    }
+
+    // ── Smooth anchor scroll ───────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Number counter animation ───────────────────────────────
+    const statEls = document.querySelectorAll('.hero-stat strong span');
+    let statsAnimated = false;
+    const statsObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !statsAnimated) {
+        statsAnimated = true;
+        statEls.forEach(el => {
+          const raw = el.textContent;
+          const num = parseFloat(raw);
+          const suffix = raw.replace(/[\d.]/g, '');
+          const isDecimal = raw.includes('.');
+          let start = 0;
+          const duration = 1800;
+          const step = timestamp => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const val = isDecimal
+              ? (num * eased).toFixed(1)
+              : Math.round(num * eased);
+            el.textContent = val + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+        statsObs.disconnect();
+      }
+    }, { threshold: 0.8 });
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObs.observe(heroStats);
+  </script>
+  <script src="chat-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Spacez - Ongoing, Upcoming & Completed Projects</title>
+  <meta name="description" content="Explore Spacez ongoing projects, upcoming launches, and completed real estate projects across Bangalore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Spacez home">
+      <img src="assets/spacez-logo-transparent.png" alt="Spacez">
+    </a>
+    <input class="nav-toggle" id="nav-toggle" type="checkbox" aria-label="Toggle navigation">
+    <label class="nav-button" for="nav-toggle"><span></span><span></span><span></span></label>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a class="active" href="projects.html">Projects</a>
+      <a href="channel-partners.html">Channel Partners</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero projects-hero">
+      <div class="page-hero-content">
+        <p class="eyebrow">Projects</p>
+        <h1>Ongoing, Upcoming, and Completed Projects</h1>
+        <p>Browse active opportunities, future launches, and completed project campaigns delivered with Spacez real estate marketing expertise.</p>
+      </div>
+    </section>
+
+    <section class="section projects-section">
+      <div class="section-heading center">
+        <p class="eyebrow dark">Project Portfolio</p>
+        <h2>Find the right project by status</h2>
+        <p class="section-subtitle">Use the status tabs to explore current availability, future launch opportunities, and completed project success stories.</p>
+      </div>
+
+      <div class="project-tabs">
+        <input id="projects-ongoing" name="project-status" type="radio" checked>
+        <input id="projects-upcoming" name="project-status" type="radio">
+        <input id="projects-completed" name="project-status" type="radio">
+
+        <div class="project-tab-controls" aria-label="Project status filters">
+          <label for="projects-ongoing">Ongoing Projects</label>
+          <label for="projects-upcoming">Upcoming Projects</label>
+          <label for="projects-completed">Completed Projects</label>
+        </div>
+
+        <div class="project-panel project-panel-ongoing">
+          <article class="project-card">
+            <img src="assets/hero-services.png" alt="Premium villa plot project">
+            <div class="project-card-body">
+              <span class="project-status">Ongoing</span>
+              <h3>Spacez Villa Plots</h3>
+              <p>Premium plotted development with clear access, green surroundings, and strong investment potential.</p>
+              <div class="project-meta">
+                <span>Villa Plots</span>
+                <span>Bangalore</span>
+              </div>
+              <a href="contact.html">Enquire Now</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <img src="assets/hero-digital-marketing.png" alt="Urban apartment project">
+            <div class="project-card-body">
+              <span class="project-status">Ongoing</span>
+              <h3>Urban Heights</h3>
+              <p>Modern apartment community positioned for families seeking connectivity, comfort, and lifestyle value.</p>
+              <div class="project-meta">
+                <span>Apartments</span>
+                <span>East Bangalore</span>
+              </div>
+              <a href="contact.html">Enquire Now</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <img src="assets/hero-affiliate-marketing.png" alt="Premium residential plot project">
+            <div class="project-card-body">
+              <span class="project-status">Ongoing</span>
+              <h3>Palm Meadows</h3>
+              <p>Residential plot campaign focused on high-intent buyers, investor outreach, and fast site visit conversion.</p>
+              <div class="project-meta">
+                <span>Residential Plots</span>
+                <span>South Bangalore</span>
+              </div>
+              <a href="contact.html">Enquire Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="project-panel project-panel-upcoming">
+          <article class="project-card">
+            <img src="assets/hero-channel-partners.png" alt="Upcoming farmland project">
+            <div class="project-card-body">
+              <span class="project-status upcoming">Upcoming</span>
+              <h3>Green Acres</h3>
+              <p>Future-ready managed farm plots planned for buyers who want open land and long-term appreciation.</p>
+              <div class="project-meta">
+                <span>Farm Plots</span>
+                <span>North Bangalore</span>
+              </div>
+              <a href="contact.html">Register Interest</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <img src="assets/hero-print-broadcast.png" alt="Upcoming plotted development">
+            <div class="project-card-body">
+              <span class="project-status upcoming">Upcoming</span>
+              <h3>Lakeview Enclave</h3>
+              <p>Planned residential plotted layout designed for peaceful living, access roads, and future growth.</p>
+              <div class="project-meta">
+                <span>Residential Plots</span>
+                <span>Bangalore Outskirts</span>
+              </div>
+              <a href="contact.html">Register Interest</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="project-panel project-panel-completed">
+          <article class="project-card">
+            <img src="assets/spacez-hero.png" alt="Completed residential project">
+            <div class="project-card-body">
+              <span class="project-status completed">Completed</span>
+              <h3>Spacez County</h3>
+              <p>Delivered residential plot campaign with strong buyer response and a successful closure cycle.</p>
+              <div class="project-meta">
+                <span>Residential Plots</span>
+                <span>Completed</span>
+              </div>
+              <a href="contact.html">Talk to Team</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <img src="assets/hero-about.png" alt="Completed apartment project">
+            <div class="project-card-body">
+              <span class="project-status completed">Completed</span>
+              <h3>Serenity Homes</h3>
+              <p>Completed apartment marketing assignment with qualified lead generation and sales support.</p>
+              <div class="project-meta">
+                <span>Apartments</span>
+                <span>Completed</span>
+              </div>
+              <a href="contact.html">Talk to Team</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <img src="assets/hero-telemarketing.png" alt="Completed villa project">
+            <div class="project-card-body">
+              <span class="project-status completed">Completed</span>
+              <h3>Signature Villas</h3>
+              <p>Premium villa marketing program completed through digital campaigns, telemarketing, and partner outreach.</p>
+              <div class="project-meta">
+                <span>Villas</span>
+                <span>Completed</span>
+              </div>
+              <a href="contact.html">Talk to Team</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div>
+        <p class="eyebrow">Project Enquiry</p>
+        <h2>Looking for the right real estate opportunity?</h2>
+        <p>Connect with Spacez to discover suitable ongoing projects, upcoming launches, or marketing support for your own property inventory.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn light" href="contact.html">Get Project Details</a>
+        <a class="btn outline-light" href="services.html">Explore Services</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <a class="brand footer-brand" href="index.html">
+        <img src="assets/spacez-logo-transparent.png" alt="Spacez">
+      </a>
+      <p>Real estate marketing and consultancy services for developers, builders, landowners, and property owners across Bangalore.</p>
+    </div>
+    <div class="footer-links">
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+      <a href="channel-partners.html">Channel Partners</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+    <div class="footer-credit">
+      <span>&copy; 2026 Spacez. All rights reserved.</span>
+      <span>Bangalore's Premier Property Marketing Agency</span>
+    </div>
+  </footer>
+
+  <div class="floating-widget" aria-label="Quick consultation">
+    <a class="floating-btn" href="contact.html" title="Get Free Consultation" aria-label="Get Free Consultation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </a>
+  </div>
+  <script src="site-animations.js"></script>
+  <script src="chat-widget.js"></script>
+</body>
+</html>
