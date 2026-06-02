@@ -5,7 +5,7 @@
     if (!hero || hero.dataset.animatedHero === 'true') return;
     hero.dataset.animatedHero = 'true';
 
-    ['hero-grid', 'hero-orb hero-orb-1', 'hero-orb hero-orb-2', 'hero-orb hero-orb-3', 'hero-blob'].forEach((className) => {
+    ['hero-grid'].forEach((className) => {
       const item = document.createElement('div');
       item.className = className;
       item.setAttribute('aria-hidden', 'true');
@@ -60,7 +60,11 @@
       '.service-block',
       '.channel-list a',
       '.partner-callout > *',
+      '.trust-snapshot article',
+      '.process-card',
       '.quote-panel',
+      '.quote-card',
+      '.showcase-project-card',
       '.final-cta > *',
       '.contact-card',
       '.contact-form',
@@ -138,10 +142,36 @@
     observer.observe(statsWrap);
   }
 
+  function initProjectSliders() {
+    document.querySelectorAll('[data-project-slider]').forEach((slider) => {
+      const track = slider.querySelector('.project-slider-track');
+      const prev = slider.querySelector('[data-project-prev]');
+      const next = slider.querySelector('[data-project-next]');
+      if (!track || !prev || !next) return;
+
+      const getStep = () => {
+        const card = track.querySelector('.showcase-project-card');
+        if (!card) return track.clientWidth;
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || 0);
+        return card.getBoundingClientRect().width + gap;
+      };
+
+      prev.addEventListener('click', () => {
+        track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+      });
+
+      next.addEventListener('click', () => {
+        track.scrollBy({ left: getStep(), behavior: 'smooth' });
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.page-hero, body > main > .hero:first-child').forEach(addHeroAtmosphere);
     markRevealElements();
     observeReveals();
     animateHomeStats();
+    initProjectSliders();
   });
 }());
